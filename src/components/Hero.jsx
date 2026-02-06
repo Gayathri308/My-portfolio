@@ -5,6 +5,20 @@ import { Github, Linkedin, Twitter, ArrowRight, Download } from 'lucide-react';
 import { PROFILE } from '../constants';
 
 const Hero = () => {
+    const handleScroll = (e, targetId) => {
+        e.preventDefault();
+        const element = document.getElementById(targetId);
+        if (element) {
+            const offset = 80;
+            const elementPosition = element.getBoundingClientRect().top;
+            const offsetPosition = elementPosition + window.pageYOffset - offset;
+            window.scrollTo({
+                top: offsetPosition,
+                behavior: 'smooth'
+            });
+        }
+    };
+
     return (
         <section id="home" className="relative min-h-[90vh] flex items-center justify-center overflow-hidden pt-12">
             <motion.div
@@ -54,6 +68,7 @@ const Hero = () => {
                     <div className="flex flex-wrap gap-3 justify-center lg:justify-start mb-8">
                         <motion.a
                             href="#projects"
+                            onClick={(e) => handleScroll(e, 'projects')}
                             whileHover={{ scale: 1.02 }}
                             className="btn-primary flex items-center gap-2"
                         >
@@ -94,11 +109,11 @@ const Hero = () => {
                     transition={{ duration: 1 }}
                     className="relative hidden lg:block"
                 >
-                    <div className="w-full aspect-square max-w-[400px] ml-auto relative group">
-                        <div className="absolute inset-0 bg-primary-500/5 rounded-[32px] blur-2xl group-hover:opacity-30 transition-opacity" />
-                        <div className="relative z-10 w-full h-full bg-slate-100 dark:bg-slate-800 rounded-[32px] overflow-hidden border-2 border-white dark:border-slate-900 shadow-xl">
+                    <div className="w-full aspect-square max-w-[350px] ml-auto relative group">
+                        <div className="absolute inset-0 bg-primary-500/10 rounded-full blur-2xl group-hover:opacity-30 transition-opacity" />
+                        <div className="relative z-10 w-full h-full bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden border-4 border-white dark:border-slate-900 shadow-2xl">
                             <img
-                                src="https://images.unsplash.com/photo-1573164713988-8665fc963095?q=80&w=2669&auto=format&fit=crop"
+                                src="/profile.jpeg"
                                 alt={PROFILE.name}
                                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                             />
